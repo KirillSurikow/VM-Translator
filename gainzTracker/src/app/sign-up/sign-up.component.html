@@ -1,6 +1,7 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title> Login </mat-card-title>
+   <a href="/"> <mat-icon fontIcon="keyboard_return"></mat-icon></a>
+    <mat-card-title> Sign Up </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-form-field>
@@ -8,11 +9,13 @@
       <input matInput />
     </mat-form-field>
     <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput />
+    </mat-form-field>
+    <mat-form-field>
       <mat-label>Passwort</mat-label>
       <input matInput />
     </mat-form-field>
-    <button mat-raised-button>Login</button>
-    <a href="signUp"><button mat-raised-button>Sign Up!</button></a>
-    <a href="forgetPassword"><span>Passwort vergessen</span></a>
+    <button mat-raised-button>Sign Up!</button>
   </mat-card-content>
 </mat-card>
