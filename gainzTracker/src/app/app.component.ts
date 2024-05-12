@@ -21,10 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.user$.subscribe(async (user) => {
-      if (!user) {
-        this.user = null;
-        this.router.navigateByUrl('/')
-      } else {
+      if(user){
         const userData = await this.db.getUserData(user.uid);
         if (userData) {
           this.user = {
@@ -34,8 +31,14 @@ export class AppComponent implements OnInit {
             uid: userData['uid'],
             username: userData['username'],
           };
-          this.router.navigateByUrl('/home')
+          this.router.navigateByUrl('/home');
         }
+      } else if(!user && this.router.url == '/signUp'){
+        this.router.navigateByUrl('/signUp')
+      } else if(!user && this.router.url == '/forgetPassword'){
+        this.router.navigateByUrl('/forgetPassword')
+      } else{
+        this.router.navigateByUrl('/login')
       }
     });
   }
