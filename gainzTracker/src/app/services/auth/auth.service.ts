@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/auth';
 import { Observable, from } from 'rxjs';
 import { DbService } from '../db/db.service';
-import { signOut } from 'firebase/auth';
+import { signOut, getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -55,4 +55,16 @@ export class AuthService {
     const promise = signOut(this.firebaseAuth)
     return from(promise);
   }
+
+  private auth = getAuth()
+  async resetPassword(email: string): Promise<any> {
+    try {
+      await sendPasswordResetEmail(this.auth, email);
+      return 'success';
+    } catch (error) {
+      console.log(error)
+      return error;
+    }
+  }
+
 }
