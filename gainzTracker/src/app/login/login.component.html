@@ -3,15 +3,26 @@
     <mat-card-title> Login </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-form-field>
-      <mat-label>E-Mail</mat-label>
-      <input matInput />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Passwort</mat-label>
-      <input matInput />
-    </mat-form-field>
-    <button mat-raised-button>Login</button>
+    <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+      <mat-form-field>
+        <mat-label>E-Mail</mat-label>
+        <input id="email" required type="email" name="email" pattern="[A-Za-z0-9._%\-]+@[A-Za-z0-9._%\-]+\.[a-z]{2,3}"  minlength="3" #emailInput="ngModel" [(ngModel)]="loginEmail" matInput />
+      </mat-form-field>
+      <mat-error *ngIf="emailInput.invalid && (emailInput.touched || emailInput.dirty)">
+        <span *ngIf="emailInput.errors?.['pattern']">Kein E-Mailformat</span>
+        <span *ngIf="emailInput.errors?.['required']">Fehlender Wert</span>
+      </mat-error>
+      <mat-form-field>
+        <mat-label>Passwort</mat-label>
+        <input id="password" required type="text" name="password"  minlength="8" #passwordInput="ngModel" [(ngModel)]="loginPassword" matInput />
+      </mat-form-field>
+      <mat-error *ngIf="passwordInput.invalid && (passwordInput.touched || passwordInput.dirty)">
+        <span *ngIf="passwordInput.errors?.['minlength']">Mindestens acht Zeichen</span>
+        <span *ngIf="passwordInput.errors?.['required']">Fehlender Wert</span>
+      </mat-error>
+      <button type="submit" [disabled]="loginForm.invalid" mat-raised-button>Login</button>
+      <div *ngIf="errormessage" class="text-danger">{{errormessage}}</div>
+    </form>
     <a href="signUp"><button mat-raised-button>Sign Up!</button></a>
     <a href="forgetPassword"><span>Passwort vergessen</span></a>
   </mat-card-content>

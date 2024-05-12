@@ -15,6 +15,13 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { HomeComponent } from './home/home.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { LogoutComponent } from './logout/logout.component';
+
+
 
 @NgModule({
   declarations: [
@@ -22,7 +29,9 @@ import { MatIconModule } from '@angular/material/icon';
     LoginComponent,
     HeaderComponent,
     SignUpComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    HomeComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +40,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    CommonModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     provideAnimationsAsync(),

@@ -4,18 +4,49 @@
     <mat-card-title> Sign Up </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-form-field>
-      <mat-label>E-Mail</mat-label>
-      <input matInput />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Username</mat-label>
-      <input matInput />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Passwort</mat-label>
-      <input matInput />
-    </mat-form-field>
-    <button mat-raised-button>Sign Up!</button>
+    <form (ngSubmit)="onSubmit(signUpForm)" #signUpForm="ngForm">
+      <mat-form-field>
+        <mat-label>Vorname</mat-label>
+        <input id="firstName" required type="text" name="firstName"  minlength="3" #firstNameInput="ngModel" [(ngModel)]="firstName" matInput />
+      </mat-form-field>
+      <mat-error *ngIf="firstNameInput.invalid && (firstNameInput.touched || firstNameInput.dirty)">
+        <span *ngIf="firstNameInput.errors?.['minlength']">Mindestens drei Zeichen</span>
+        <span *ngIf="firstNameInput.errors?.['required']">Fehlender Wert</span>
+      </mat-error>
+      <mat-form-field>
+        <mat-label>Nachname</mat-label>
+        <input id="lastName" required type="text" name="lastName"  minlength="3" #lastNameInput="ngModel" [(ngModel)]="lastName" matInput />
+      </mat-form-field>
+      <mat-error *ngIf="lastNameInput.invalid && (lastNameInput.touched || lastNameInput.dirty)">
+        <span *ngIf="lastNameInput.errors?.['minlength']">Mindestens drei Zeichen</span>
+        <span *ngIf="lastNameInput.errors?.['required']">Fehlender Wert</span>
+      </mat-error>
+      <mat-form-field>
+        <mat-label>E-Mail</mat-label>
+        <input id="email" required type="email" name="email" pattern="[A-Za-z0-9._%\-]+@[A-Za-z0-9._%\-]+\.[a-z]{2,3}"  minlength="3" #emailInput="ngModel" [(ngModel)]="signUpEmail" matInput />
+      </mat-form-field>
+      <mat-error *ngIf="emailInput.invalid && (emailInput.touched || emailInput.dirty)">
+        <span *ngIf="emailInput.errors?.['pattern']">Kein E-Mail-Format</span>
+        <span *ngIf="emailInput.errors?.['required']">Fehlender Wert</span>
+      </mat-error>
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input id="username" required type="text" name="username"  minlength="5" #usernameInput="ngModel" [(ngModel)]="userName" matInput />
+      </mat-form-field>
+      <mat-error *ngIf="usernameInput.invalid && (usernameInput.touched || usernameInput.dirty)">
+        <span *ngIf="usernameInput.errors?.['minlength']">Mindestens drei Zeichen</span>
+        <span *ngIf="usernameInput.errors?.['required']">Fehlender Wert</span>
+      </mat-error>
+      <mat-form-field>
+        <mat-label>Passwort</mat-label>
+        <input id="password" required type="text" name="password"  minlength="8" #passwordInput="ngModel" [(ngModel)]="password" matInput />
+      </mat-form-field>
+      <mat-error *ngIf="passwordInput.invalid && (passwordInput.touched || passwordInput.dirty)">
+        <span *ngIf="passwordInput.errors?.['minlength']">Mindestens acht Zeichen</span>
+        <span *ngIf="passwordInput.errors?.['required']">Fehlender Wert</span>
+      </mat-error>
+      <button type="submit" [disabled]="signUpForm.invalid" mat-raised-button>Sign Up!</button>
+    </form>
   </mat-card-content>
 </mat-card>
+
